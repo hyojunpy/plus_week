@@ -1,5 +1,6 @@
-package com.example.demo.util;
+package com.example.demo;
 
+import com.example.demo.util.PasswordEncoder;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,5 +38,4 @@ class PasswordEncoderTest {
 
         assertTrue(isMatch, "패스워드 불일치");
     }
-
 }
