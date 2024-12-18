@@ -1,10 +1,13 @@
 package com.example.demo.repository;
 
 import com.example.demo.entity.Reservation;
+import com.example.demo.status.ReservationStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,11 +18,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long>,
 
     List<Reservation> searchReservations(Long userId, Long itemId);
 
-    List<Reservation> findByUserIdAndItemId(Long userId, Long itemId);
-
-    List<Reservation> findByUserId(Long userId);
-
-    List<Reservation> findByItemId(Long itemId);
+    default Reservation findByQuery(Long id) {
+        return findByIdOrElseThrow(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND) );
+    }
 
     @Query("SELECT r FROM Reservation r " +
             "WHERE r.item.id = :id " +
@@ -33,5 +34,12 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long>,
 
     @Query("SELECT R FROM Reservation R JOIN FETCH R.item I JOIN FETCH I.manager JOIN FETCH I.owner")
     List<Reservation> findAllReservationWithUserAndItem();
+
+    @Query("select r " +
+            "from Reservation r " +
+            "join fetch r.user " +
+            "join fetch r.item " +
+            "where r.id = :id")
+    Optional<Reservation> findByIdOrElseThrow(@Param("id") Long reservationId);
 
 }
