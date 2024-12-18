@@ -16,8 +16,6 @@ import java.util.Optional;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long>, ReservationRepositoryCustom{
 
-    List<Reservation> searchReservations(Long userId, Long itemId);
-
     default Reservation findByQuery(Long id) {
         return findByIdOrElseThrow(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND) );
     }
