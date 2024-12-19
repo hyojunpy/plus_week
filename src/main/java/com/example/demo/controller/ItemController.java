@@ -16,6 +16,7 @@ public class ItemController {
         this.itemService = itemService;
     }
 
+    // 물건 생성
     @PostMapping
     public void createItem(@RequestBody ItemRequestDto itemRequestDto) {
          itemService.createItem(itemRequestDto.getName(),

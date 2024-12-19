@@ -13,6 +13,7 @@ public class AdminController {
         this.adminService = adminService;
     }
 
+    //유저 차단
     @PostMapping("/report-users")
     public void reportUsers(@RequestBody ReportRequestDto reportRequestDto) {
         adminService.reportUsers(reportRequestDto.getUserIds());

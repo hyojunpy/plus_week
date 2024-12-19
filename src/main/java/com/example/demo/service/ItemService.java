@@ -17,6 +17,7 @@ public class ItemService {
         this.userRepository = userRepository;
     }
 
+    //물건 생성
     @Transactional
     public void createItem(String name, String description, Long ownerId, Long managerId) {
         User owner = userRepository.findById(ownerId).orElseThrow(() -> new IllegalArgumentException("해당 ID에 맞는 값이 존재하지 않습니다."));

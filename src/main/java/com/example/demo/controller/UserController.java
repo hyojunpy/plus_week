@@ -21,11 +21,13 @@ public class UserController {
         this.userService = userService;
     }
 
+    //회원가입
     @PostMapping
     public void signupWithEmail(@RequestBody UserRequestDto userRequestDto) {
         userService.signupWithEmail(userRequestDto);
     }
 
+    //로그인
     @PostMapping("/login")
     public void loginWithEmail(@RequestBody LoginRequestDto loginRequestDto, HttpServletRequest request) {
         Authentication authentication = userService.loginUser(loginRequestDto);
@@ -33,6 +35,7 @@ public class UserController {
         session.setAttribute(GlobalConstants.USER_AUTH, authentication);
     }
 
+    //로그아웃
     @PostMapping("/logout")
     public void logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);

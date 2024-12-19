@@ -20,6 +20,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    // 회원가입
     @Transactional
     public void signupWithEmail(UserRequestDto userRequestDto) {
         String encodedPassword = PasswordEncoder.encode(userRequestDto.getPassword());
@@ -28,6 +29,7 @@ public class UserService {
         userRepository.save(userRequestDto.toEntity());
     }
 
+    // 로그인
     public Authentication loginUser(LoginRequestDto loginRequestDto) {
         User user = userRepository.findByEmail(loginRequestDto.getEmail());
         if (user == null || !PasswordEncoder.matches(loginRequestDto.getPassword(), user.getPassword())) {

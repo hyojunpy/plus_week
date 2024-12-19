@@ -38,6 +38,7 @@ public class ReservationService {
     }
 
     // TODO: 1. 트랜잭션 이해
+    //예약 생성
     @Transactional
     public void createReservation(Long itemId, Long userId, LocalDateTime startAt, LocalDateTime endAt) {
         // 쉽게 데이터를 생성하려면 아래 유효성검사 주석 처리
@@ -56,6 +57,7 @@ public class ReservationService {
     }
 
     // TODO: 3. N+1 문제
+    //예약 전체 조회
     public List<ReservationResponseDto> getReservations() {
         List<Reservation> reservations = reservationRepository.findAllReservationWithUserAndItem();
 
@@ -74,7 +76,9 @@ public class ReservationService {
         }).toList();
     }
 
+
     // TODO: 5. QueryDSL 검색 개선
+    // 예약 조건 조회
     public List<ReservationResponseDto> searchAndConvertReservations(Long userId, Long itemId) {
 
         List<Reservation> reservations = searchReservations(userId, itemId);
@@ -111,6 +115,7 @@ public class ReservationService {
     }
 
     // TODO: 7. 리팩토링
+    //예약 상태 수정
     @Transactional
     public ReservationResponseDto updateReservationStatus(Long reservationId, ReservationStatus status) {
         Reservation reservation = reservationRepository.findByQuery(reservationId);

@@ -16,6 +16,7 @@ public class AdminService {
     }
 
     // TODO: 4. find or save 예제 개선
+    // 유저 차단
     @Transactional
     public void reportUsers(List<Long> userIds) {
 //        for (Long userId : userIds) {
