@@ -25,8 +25,14 @@ public class AdminService {
 //            userRepository.save(user);
 //        }
 
-        List<User> user = userRepository.findAllById(userIds);
-        user.forEach(User::updateStatusToBlocked);
-        userRepository.saveAll(user);
+        List<User> users = userRepository.findAllById(userIds);
+
+        if(users.isEmpty()) {
+            throw new IllegalArgumentException("해당 아이디에 대한유저 권한인 사용자가 존재하지 않습니다.");
+        }
+
+        for(User user : users) {
+            user.updateStatusToBlocked();
+        }
     }
 }
