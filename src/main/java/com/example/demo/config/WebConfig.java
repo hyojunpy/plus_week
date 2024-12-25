@@ -21,9 +21,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer, HandlerInterceptor {
 
     // TODO: 2. 인가에 대한 이해
-    private static final String[] AUTH_REQUIRED_PATH_PATTERNS = {"/users/logout", "/items/*"};
-    private static final String[] USER_ROLE_REQUIRED_PATH_PATTERNS = {"/reservations/*"};
-    private static final String[] ADMIN_REQUIRED_PATH_PATTERNS = {"/admins/*"};
+    private static final String[] AUTH_REQUIRED_PATH_PATTERNS = {"/users/logout", "/admins/**", "/items/**"};
+    private static final String[] USER_ROLE_REQUIRED_PATH_PATTERNS = {"/reservations/**"};
+    private static final String[] ADMIN_REQUIRED_PATH_PATTERNS = {"/admins/**"};
 
     private final AuthInterceptor authInterceptor;
     private final UserRoleInterceptor userRoleInterceptor;
@@ -35,13 +35,14 @@ public class WebConfig implements WebMvcConfigurer, HandlerInterceptor {
                 .addPathPatterns(AUTH_REQUIRED_PATH_PATTERNS)
                 .order(Ordered.HIGHEST_PRECEDENCE);
 
+        registry.addInterceptor(adminInterceptor)
+                .addPathPatterns(ADMIN_REQUIRED_PATH_PATTERNS)
+                .order(Ordered.HIGHEST_PRECEDENCE + 1);
+
         registry.addInterceptor(userRoleInterceptor)
                 .addPathPatterns(USER_ROLE_REQUIRED_PATH_PATTERNS)
                 .order(Ordered.HIGHEST_PRECEDENCE + 2);
 
-        registry.addInterceptor(adminInterceptor)
-                .addPathPatterns(ADMIN_REQUIRED_PATH_PATTERNS)
-                .order(Ordered.HIGHEST_PRECEDENCE + 1);
     }
 
     @Bean
