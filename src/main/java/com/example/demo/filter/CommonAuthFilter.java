@@ -5,10 +5,12 @@ import jakarta.servlet.Filter;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.Generated;
 import org.springframework.http.HttpStatus;
 
 import java.util.Optional;
 
+@Generated
 public interface CommonAuthFilter extends Filter {
 
     default HttpSession findHttpSession(ServletRequest request) {

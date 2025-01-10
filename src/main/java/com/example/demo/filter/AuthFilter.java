@@ -4,9 +4,11 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import lombok.Generated;
 
 import java.io.IOException;
 
+@Generated
 public class AuthFilter implements CommonAuthFilter {
 
     @Override

@@ -1,7 +1,9 @@
 package com.example.demo.util;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import lombok.Generated;
 
+@Generated
 public class PasswordEncoder {
 
     public static String encode(String rawPassword) {

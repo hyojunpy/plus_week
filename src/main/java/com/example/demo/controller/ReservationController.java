@@ -20,11 +20,12 @@ public class ReservationController {
 
     //예약 생성
     @PostMapping
-    public void createReservation(@RequestBody ReservationRequestDto reservationRequestDto) {
-        reservationService.createReservation(reservationRequestDto.getItemId(),
+    public ResponseEntity<ReservationResponseDto> createReservation(@RequestBody ReservationRequestDto reservationRequestDto) {
+        ReservationResponseDto responseDto = reservationService.createReservation(reservationRequestDto.getItemId(),
                                             reservationRequestDto.getUserId(),
                                             reservationRequestDto.getStartAt(),
                                             reservationRequestDto.getEndAt());
+        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
     //예약 상태 수정

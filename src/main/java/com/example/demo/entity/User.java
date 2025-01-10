@@ -31,6 +31,15 @@ public class User {
 
     public User() {}
 
+    public User(Long id, String email, String nickname, String password, UserStatus status, Role role) {
+        this.id = id;
+        this.email = email;
+        this.nickname = nickname;
+        this.password = password;
+        this.status = status;
+        this.role = role;
+    }
+
     public void updateStatusToBlocked() {
         this.status = UserStatus.BLOCKED;
     }
