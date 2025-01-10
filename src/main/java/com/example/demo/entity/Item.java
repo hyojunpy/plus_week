@@ -38,5 +38,13 @@ public class Item {
         this.owner = owner;
     }
 
+    public Item( String name,  String description, User manager, User owner, String status) {
+        this.name = name;
+        this.description = description;
+        this.manager = manager;
+        this.owner = owner;
+        this.status = status;
+    }
+
     public Item() {}
 }

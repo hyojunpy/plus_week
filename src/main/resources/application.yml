@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: demo
+  servlet:
+    multipart:
+      max-file-size: 5MB  # ?? ??? ?? ??
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/demo
+    username: root
+    password: 1111
+
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database: mysql
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+    generate-ddl: false
+    properties:
+      hibernate:
+        format_sql: true
+        enable_lazy_load_no_trans: true
+        globally_quoted_identifiers: true
+
+  config:
+    import: optional:file:.env[.properties]
+
+
+#spring.jpa.show-sql=true
+#spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+#
+## create, update, none, creat-drop
+#spring.jpa.database=mysql
+#spring.jpa.hibernate.ddl-auto= update
+#spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+#spring.jpa.generate-ddl=false
+#spring.jpa.properties.hibernate.format_sql=true
+#spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true

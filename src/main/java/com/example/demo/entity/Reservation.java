@@ -39,6 +39,15 @@ public class Reservation {
         this.endAt = endAt;
     }
 
+    public Reservation(Long id, Item item, User user, LocalDateTime startAt, LocalDateTime endAt, ReservationStatus status) {
+        this.id = id;
+        this.item = item;
+        this.user = user;
+        this.startAt = startAt;
+        this.endAt = endAt;
+        this.status = status;
+    }
+
     public Reservation() {}
 
     public void updateStatus(ReservationStatus status) {
